@@ -12,7 +12,7 @@ def home():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
+        user = User()
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
@@ -43,4 +43,4 @@ def logout():
 @app.route('/profile')
 @login_required
 def profile():
-    return render_template("profile.html")
+    return render_template("profile.html", user=current_user)
